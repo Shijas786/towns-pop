@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Towns Pop (Chain Reaction) 🟢🔴
 
-## Getting Started
+**Towns Pop** is a strategic "Chain Reaction" game built as a generic **Towns Mini App**. It features a local pass-and-play mode, a highly integrated chat bot for community engagement, and a real-time multiplayer implementation backend powered by **SpacetimeDB**.
 
-First, run the development server:
+## 🚀 Features
+
+### 🎮 Code Game
+- **Chain Reaction Logic**: Classic strategy game where atoms multiply and explode to capture neighbor cells.
+- **Optimized Board**: Fixed 9x6 grid for the best competitive experience on mobile and desktop.
+- **Towns Integrated**: Uses `@farcaster/frame-sdk` to run natively within the Towns context.
+
+### 🤖 Towns Chat Bot
+- **Commands**: 
+  - `/play`: Launches the Mini App directly from chat.
+  - `/help`: Shows game rules and commands.
+- **Stack**: Built with `@towns-protocol/bot`, Hono, and Next.js API Routes.
+- **Status**: Code complete. *Note: Currently disabled in production to resolve standard Vercel build compatibility.*
+
+### ⚡ Real-Time Multiplayer (SpacetimeDB)
+- **Backend (Rust)**: Custom SpacetimeDB module handling authoritative game state, turn logic, and atomic explosions.
+- **Frontend (TS)**: `useOnlineChainReaction` hook for live state synchronization.
+- **Status**: Code complete. Requires SpacetimeDB CLI to compile and publish the Rust module.
+
+## 🛠️ Stack
+
+- **Frontend**: Next.js 14, React, Tailwind CSS, Shadcn UI.
+- **Bot**: Towns Protocol SDK.
+- **Backend**: Rust (SpacetimeDB).
+- **Deployment**: Vercel.
+
+## 🏁 Getting Started
+
+### 1. Run Local Game
+```bash
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000).
+
+### 2. SpacetimeDB Backend (Optional)
+Requires [SpacetimeDB CLI](https://spacetimedb.com/).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Initialize & Publish
+cd server
+spacetime publish server
+
+# Update Frontend
+# Edit src/lib/spacetimedb.ts with your new DB name/token.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤝 Contribution
+This project uses a standard Git flow.
+- `main`: Stable, deployment-ready branch.
+- `development`: Active development branch.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Please submit PRs to `development`.
