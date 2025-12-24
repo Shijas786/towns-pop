@@ -14,6 +14,7 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
         isGameOver: false,
         winner: null,
         isAnimating: false,
+        turns: 0,
     });
 
     const [explosionQueue, setExplosionQueue] = useState<{ row: number; col: number }[]>([]);
@@ -33,11 +34,15 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
             isGameOver: false,
             winner: null,
             isAnimating: false,
+            turns: 0,
         });
         setExplosionQueue([]);
     }, [playerCount, customColors, rows, cols]);
 
-    const checkWinner = useCallback((board: Board, players: Player[]) => {
+    const checkWinner = useCallback((board: Board, players: Player[], turns: number) => {
+        // Cannot win before everyone has played at least once (approx heuristic)
+        if (turns < players.length) return null;
+
         const playerOrbCounts: Record<string, number> = {};
         players.forEach(p => playerOrbCounts[p.color] = 0);
 
@@ -49,11 +54,11 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
             }
         }));
 
-        if (totalOrbs < 2) return null; // Game just started or empty
+        if (totalOrbs === 0) return null;
 
         const activePlayers = players.filter(p => playerOrbCounts[p.color] > 0);
 
-        if (activePlayers.length === 1 && totalOrbs > 1) {
+        if (activePlayers.length === 1) {
             return activePlayers[0];
         }
         return null;
@@ -74,7 +79,8 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
 
             if (unstableCells.length === 0) {
                 setGameState(prev => {
-                    const winner = checkWinner(board, prev.players);
+                    // Check winner using current turn count
+                    const winner = checkWinner(board, prev.players, prev.turns);
                     if (winner) {
                         return {
                             ...prev,
@@ -85,6 +91,9 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
                         };
                     }
 
+                    // Increment turn ONLY when chain settles and no winner
+                    const nextTurnCount = prev.turns + 1;
+
                     let nextIndex = (prev.currentPlayerIndex + 1) % prev.players.length;
 
                     // Logic to skip eliminated players
@@ -94,8 +103,8 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
                         if (cell.owner) playerOrbCounts[cell.owner] += cell.count;
                     }));
 
-                    const totalOrbs = Object.values(playerOrbCounts).reduce((a, b) => a + b, 0);
-                    if (totalOrbs >= prev.players.length) {
+                    // Only skip players if we are past the first round
+                    if (nextTurnCount >= prev.players.length) {
                         let attempts = 0;
                         while (attempts < prev.players.length) {
                             const nextPlayer = prev.players[nextIndex];
@@ -111,7 +120,8 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
                         isAnimating: false,
                         currentPlayerIndex: nextIndex,
                         winner: null,
-                        isGameOver: false
+                        isGameOver: false,
+                        turns: nextTurnCount
                     };
                 });
                 return;
@@ -142,7 +152,7 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
             board = nextBoard;
             let gameOver = false;
             setGameState(prev => {
-                const winner = checkWinner(board, prev.players);
+                const winner = checkWinner(board, prev.players, prev.turns);
                 if (winner) {
                     gameOver = true;
                     return { ...prev, board, isAnimating: false, winner, isGameOver: true };
@@ -169,6 +179,7 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
         newBoard[row][col].count++;
         newBoard[row][col].owner = currentPlayer.color;
 
+        // Note: turns are incremented in processChainReaction after settling
         setGameState(prev => ({ ...prev, board: newBoard, isAnimating: true }));
         processChainReaction(newBoard, currentPlayer.color);
     }, [gameState, processChainReaction]);

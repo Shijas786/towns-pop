@@ -23,6 +23,7 @@ export interface GameState {
     isGameOver: boolean;
     winner: Player | null;
     isAnimating: boolean; // To block input during chain reactions
+    turns: number;
 }
 
 export const ROWS = 8;

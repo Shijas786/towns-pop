@@ -21,6 +21,21 @@
 - **Frontend (TS)**: `useOnlineChainReaction` hook for live state synchronization.
 - **Status**: Code complete. Requires SpacetimeDB CLI to compile and publish the Rust module.
 
+## 📖 How to Play
+
+**Objective**: Eliminate all opponent orbs to win the game.
+
+1.  **Place Orbs**: Players take turns placing an "atom" in a cell. You can only place atoms in empty cells or cells you already own.
+2.  **Critical Mass**: Each cell has a capacity equivalent to its number of neighbors:
+    -   **Corner**: Explodes at **2** atoms.
+    -   **Edge**: Explodes at **3** atoms.
+    -   **Inner**: Explodes at **4** atoms.
+3.  **Chain Reaction**: When a cell reaches critical mass, it explodes!
+    -   Its atoms are distributed to neighbors.
+    -   **Capture**: If a neighbor cell belonged to an opponent, it is **captured** and turns to your color.
+    -   **Chains**: If a neighbor also reaches critical mass, it explodes too, creating a chain reaction.
+4.  **Winning**: The game ends when all other players lose all their atoms.
+
 ## 🛠️ Stack
 
 - **Frontend**: Next.js 14, React, Tailwind CSS, Shadcn UI.
