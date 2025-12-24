@@ -1,0 +1,11 @@
+C:\Users\Gaming X\towns pop\server\target\debug\deps\decorum-ef204bd75901e6ce.d: C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\lib.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\canonical.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\cmp.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\constraint.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\hash.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\primitive.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\proxy.rs
+
+C:\Users\Gaming X\towns pop\server\target\debug\deps\libdecorum-ef204bd75901e6ce.rmeta: C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\lib.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\canonical.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\cmp.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\constraint.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\hash.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\primitive.rs C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\proxy.rs
+
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\lib.rs:
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\canonical.rs:
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\cmp.rs:
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\constraint.rs:
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\hash.rs:
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\primitive.rs:
+C:\Users\Gaming\ X\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\decorum-0.3.1\src\proxy.rs:
