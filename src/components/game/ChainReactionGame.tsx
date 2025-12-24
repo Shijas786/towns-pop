@@ -52,10 +52,19 @@ export const ChainReactionGame = () => {
 
             {/* Game Header */}
             <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-20 pointer-events-none">
-                <div className="bg-white/80 backdrop-blur-sm border-2 border-slate-800 p-2 px-4 rounded-full pointer-events-auto">
-                    <span className="font-bold flex items-center gap-2" style={{ fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif' }}>
-                        Turn: <span className="w-4 h-4 rounded-full border border-black" style={{ backgroundColor: currentPlayer?.color }} /> {currentPlayer?.name}
-                    </span>
+                <div className="flex gap-2 pointer-events-auto">
+                    <button
+                        onClick={() => setPlayersCount(null)}
+                        className="bg-white/80 backdrop-blur-sm border-2 border-slate-800 p-2 px-4 rounded-full font-bold hover:bg-slate-100 transition-colors flex items-center gap-2"
+                        style={{ fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif' }}
+                    >
+                        ← Back
+                    </button>
+                    <div className="bg-white/80 backdrop-blur-sm border-2 border-slate-800 p-2 px-4 rounded-full">
+                        <span className="font-bold flex items-center gap-2" style={{ fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif' }}>
+                            Turn: <span className="w-4 h-4 rounded-full border border-black" style={{ backgroundColor: currentPlayer?.color }} /> {currentPlayer?.name}
+                        </span>
+                    </div>
                 </div>
 
                 {gameState.isGameOver && (
