@@ -22,8 +22,8 @@ let botInstance: BotInstance | null = null;
 export async function getBot(): Promise<BotInstance | null> {
     if (botInstance) return botInstance;
 
-    if (!privateData || privateData === 'placeholder') {
-        console.warn('TOWNS_APP_PRIVATE_DATA not set, bot disabled');
+    if (!privateData || privateData.includes('folder') || privateData.length < 10) {
+        console.warn('TOWNS_APP_PRIVATE_DATA not set properly, bot disabled');
         return null;
     }
 
