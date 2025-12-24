@@ -2,23 +2,7 @@
  * Get recommended board size based on number of players
  */
 export function getBoardSize(maxPlayers: number): { rows: number; cols: number } {
-    switch (maxPlayers) {
-        case 2:
-            return { rows: 9, cols: 6 };
-        case 3:
-        case 4:
-            return { rows: 12, cols: 10 };
-        case 5:
-            return { rows: 15, cols: 15 };
-        default:
-            if (maxPlayers <= 2) {
-                return { rows: 9, cols: 6 };
-            } else if (maxPlayers <= 4) {
-                return { rows: 12, cols: 10 };
-            } else {
-                return { rows: 15, cols: 15 };
-            }
-    }
+    return { rows: 9, cols: 6 };
 }
 
 /**
