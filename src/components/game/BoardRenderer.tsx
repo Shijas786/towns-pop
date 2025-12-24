@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState, useMemo, useCallback } from "react";
-import { Board, Cell, PlayerColor } from "@/types/game";
-import { getMaxCapacity } from "@/lib/gameLogic";
-import { soundManager } from "@/lib/sound";
+import { Board, PlayerColor } from "@/types/game";
 import { ZoomPanPinch } from "@/components/ui/ZoomPanPinch";
 
 interface BoardRendererProps {
@@ -11,14 +9,12 @@ interface BoardRendererProps {
     rows: number;
     cols: number;
     onCellClick: (row: number, col: number) => void;
-    animating: boolean;
     explosionQueue: { row: number; col: number }[];
     clearExplosionQueue: () => void;
     currentTurnPlayer?: PlayerColor | null;
 }
 
 const BASE_CELL_SIZE = 50;
-const TILT_ANGLE = 0;
 const ORB_RADIUS = 18;
 
 const COLORS: Record<PlayerColor, string> = {
@@ -50,7 +46,6 @@ export const BoardRenderer: React.FC<BoardRendererProps> = ({
     rows,
     cols,
     onCellClick,
-    animating,
     explosionQueue,
     clearExplosionQueue,
     currentTurnPlayer,
@@ -83,11 +78,11 @@ export const BoardRenderer: React.FC<BoardRendererProps> = ({
         return { scale: finalScale, offsetX: dimensions.width / 2, offsetY: dimensions.height / 2 };
     }, [dimensions, rows, cols]);
 
-    const project = (x: number, y: number, z: number) => {
+    const project = useCallback((x: number, y: number, z: number) => {
         const sx = x * scale + offsetX;
         const sy = (y - z) * scale + offsetY;
         return { x: sx, y: sy, scale: scale };
-    };
+    }, [scale, offsetX, offsetY]);
 
     useEffect(() => {
         if (explosionQueue.length > 0) {
@@ -123,7 +118,7 @@ export const BoardRenderer: React.FC<BoardRendererProps> = ({
             });
             clearExplosionQueue();
         }
-    }, [explosionQueue, clearExplosionQueue, board, rows, cols]);
+    }, [explosionQueue, clearExplosionQueue, board, rows, cols, project]);
 
     const drawOrbShape = useCallback((ctx: CanvasRenderingContext2D, x: number, y: number, scale: number, color: PlayerColor) => {
         const radius = ORB_RADIUS * scale;
@@ -226,7 +221,7 @@ export const BoardRenderer: React.FC<BoardRendererProps> = ({
                 }
             }
 
-            flyingOrbsRef.current.forEach((orb, i) => {
+            flyingOrbsRef.current.forEach((orb) => {
                 orb.progress += dt / 600;
                 if (orb.progress < 1) {
                     const startX = (orb.c - cols / 2 + 0.5) * BASE_CELL_SIZE;
@@ -257,7 +252,7 @@ export const BoardRenderer: React.FC<BoardRendererProps> = ({
         };
         animationFrameId = requestAnimationFrame(render);
         return () => cancelAnimationFrame(animationFrameId);
-    }, [board, rows, cols, dimensions, scale, offsetX, offsetY, drawOrbGroup, drawOrbShape, currentTurnPlayer]);
+    }, [board, rows, cols, dimensions, scale, offsetX, offsetY, drawOrbGroup, drawOrbShape, currentTurnPlayer, project]);
 
     const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;

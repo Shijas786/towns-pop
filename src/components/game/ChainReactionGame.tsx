@@ -6,7 +6,7 @@ import { BoardRenderer } from '@/components/game/BoardRenderer';
 import { DoodleBackground } from '@/components/ui/DoodleBackground';
 import { DoodleText } from '@/components/ui/DoodleText';
 import { OrbMascot } from '@/components/ui/OrbMascot';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export const ChainReactionGame = () => {
     const [playersCount, setPlayersCount] = useState<number | null>(null);
@@ -84,7 +84,6 @@ export const ChainReactionGame = () => {
                     rows={gameState.board.length}
                     cols={gameState.board[0].length}
                     onCellClick={makeMove}
-                    animating={gameState.isAnimating}
                     explosionQueue={explosionQueue}
                     clearExplosionQueue={clearExplosionQueue}
                     currentTurnPlayer={currentPlayer?.color}

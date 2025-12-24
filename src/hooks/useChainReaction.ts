@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Board, Player, GameState, PLAYER_COLORS, PlayerColor } from '@/types/game';
+import { Board, Cell, Player, GameState, PLAYER_COLORS, PlayerColor } from '@/types/game';
 import { createBoard, getMaxCapacity, isValidMove, getNeighbors } from '@/lib/gameLogic';
 import { getBoardSize } from '@/lib/boardSize';
 import { soundManager } from '@/lib/sound';
@@ -90,7 +90,7 @@ export const useChainReaction = (playerCount: number, customColors?: PlayerColor
                     // Logic to skip eliminated players
                     const playerOrbCounts: Record<string, number> = {};
                     prev.players.forEach(p => playerOrbCounts[p.color] = 0);
-                    board.forEach((row: any) => row.forEach((cell: any) => {
+                    board.forEach((row: Cell[]) => row.forEach((cell: Cell) => {
                         if (cell.owner) playerOrbCounts[cell.owner] += cell.count;
                     }));
 

@@ -56,7 +56,7 @@ export const DoodleBackground = () => {
                 x: Math.random() * width,
                 y: Math.random() * height,
                 size: 20 + Math.random() * 40,
-                type: ['cloud', 'bubble', 'arrow', 'star', 'circle'][Math.floor(Math.random() * 5)] as any,
+                type: (['cloud', 'bubble', 'arrow', 'star', 'circle'] as const)[Math.floor(Math.random() * 5)],
                 color: COLORS[Math.floor(Math.random() * COLORS.length)],
                 rotation: Math.random() * Math.PI * 2,
                 rotationSpeed: (Math.random() - 0.5) * 0.02,

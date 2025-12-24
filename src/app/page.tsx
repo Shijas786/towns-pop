@@ -6,14 +6,10 @@ import { ChainReactionGame } from "@/components/game/ChainReactionGame";
 
 export default function Home() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
-  const [context, setContext] = useState<any>(null);
-
   useEffect(() => {
     const load = async () => {
       try {
-        const ctx = await sdk.context;
-        setContext(ctx);
-        sdk.actions.ready();
+        await sdk.actions.ready();
       } catch (e) {
         console.error("SDK load failed", e);
       } finally {
