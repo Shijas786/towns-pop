@@ -37,3 +37,5 @@ next-env.d.ts
 
 # source repo reference
 source-repo/
+
+.vercel
