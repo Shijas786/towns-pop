@@ -1,7 +1,7 @@
 /**
  * Get recommended board size based on number of players
  */
-export function getBoardSize(_maxPlayers: number): { rows: number; cols: number } {
+export function getBoardSize(): { rows: number; cols: number } {
     return { rows: 9, cols: 6 };
 }
 

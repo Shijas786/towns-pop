@@ -5,7 +5,7 @@ import { getBoardSize } from '@/lib/boardSize';
 import { soundManager } from '@/lib/sound';
 
 export const useChainReaction = (playerCount: number, customColors?: PlayerColor[]) => {
-    const { rows, cols } = useMemo(() => getBoardSize(playerCount), [playerCount]);
+    const { rows, cols } = useMemo(() => getBoardSize(), []);
 
     const [gameState, setGameState] = useState<GameState>({
         board: createBoard(rows, cols),
